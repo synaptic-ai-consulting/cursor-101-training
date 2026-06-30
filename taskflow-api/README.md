@@ -64,7 +64,12 @@ src/
 tests/
   unit/             # Service-layer unit tests (DB mocked)
   integration/      # Route integration tests (supertest)
-.cursor/
+```
+
+Cursor rules live at the **workspace root** (parent of `taskflow-api/`):
+
+```
+../.cursor/
   rules/            # .cursor/rules — sparse stub for Session 1 lab
 ```
 
@@ -79,7 +84,7 @@ These gaps are features of the training design — not bugs to fix immediately.
 | `routes/tasks.ts` | validate middleware not applied to POST | Session 1 Lab |
 | `routes/projects.ts` | validate middleware not applied to POST | Session 1 Lab |
 | `middleware/validate.ts` | TODO stubs inside validators | Session 1 Lab |
-| `.cursor/rules/project.mdc` | Sparse — needs full rules | Session 1 Lab |
+| `../.cursor/rules/project.mdc` | Sparse — needs full rules | Session 1 Lab |
 | `tests/unit/taskService.test.ts` | TODO test stubs | Session 2 TDD Lab |
 | `tests/integration/tasks.test.ts` | TODO test stubs | Session 2 TDD Lab |
 | Auth routes | Not implemented | Session 5 Capstone |
@@ -105,7 +110,7 @@ These gaps are features of the training design — not bugs to fix immediately.
 
 **Session 1:**
 - Lab 1: Use `@docs` to import Express validation library docs; add validation to one endpoint
-- Lab 2: Write a complete `.cursor/rules` for this project
+- Lab 2: Write a complete `.cursor/rules` at the workspace root (use `globs: taskflow-api/**` to scope rules to this project)
 
 **Session 2:**
 - Lab 1: Add a `GET /tasks/search?q=` endpoint using Agent Mode
