@@ -1,0 +1,26 @@
+---
+description: >-
+  Security standards for the TaskFlow API source code. Covers secret and credential
+  handling (no hardcoded values, no .env commits), JWT auth middleware requirements,
+  route protection for /tasks and /projects, public auth endpoints, input validation
+  before services, and parameterized SQL queries — never interpolate user input.
+globs: src/**/*
+alwaysApply: true
+---
+# Security Rules
+
+## Never expose
+Never log or return password fields, even hashed.
+Never include stack traces in API responses.
+Never hardcode credentials, tokens, or secrets — use process.env.
+Never commit .env files.
+
+## Auth
+JWT tokens must be validated in middleware before route handlers access req.user.
+Protect /tasks and /projects routes with the auth middleware.
+Public routes: POST /auth/register, POST /auth/login, GET /health.
+
+## Input
+Always validate and sanitize input before passing to services.
+Never interpolate user input directly into SQL strings.
+Use parameterized queries ($1, $2) for all DB queries.

@@ -1,0 +1,36 @@
+---
+description: >-
+  Express backend patterns for TaskFlow routes, services, and middleware. Enforces
+  ApiResponse<T> wrappers, AppError with next(err) error handling, validate middleware
+  on all POST/PATCH routes, async service functions that return unwrapped data, and
+  naming conventions (kebab-case routes, camelCase services, PascalCase DTOs).
+globs: src/{routes,services,middleware}/**/*
+alwaysApply: true
+---
+# Backend Patterns
+
+## Response format
+All routes must return ApiResponse<T> from src/types/index.ts.
+Success: { success: true, data: T }
+Error: { success: false, error: string }
+Never return raw objects. Never return arrays directly.
+
+## Error handling
+Always use AppError from src/types/index.ts.
+All route handlers must call next(err) — never catch and swallow.
+Never use console.log. Use next(new AppError(message, statusCode)).
+The errorHandler middleware in src/middleware/errorHandler.ts handles all errors.
+
+## Validation
+Every POST and PATCH route must apply the validate middleware before the handler.
+Validate using the schema pattern already in src/middleware/validate.ts.
+
+## Services
+Service functions are async and return the data type directly (not wrapped).
+Routes wrap the return value in ApiResponse<T>.
+Services throw AppError on business logic failures.
+
+## Naming
+Routes: kebab-case filenames (tasks.ts, auth.ts)
+Services: camelCase functions (createTask, findTaskById)
+DTOs: PascalCase + suffix (CreateTaskDto, UpdateTaskDto)

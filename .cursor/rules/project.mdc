@@ -1,19 +1,23 @@
-# TaskFlow API — Cursor Rules
-# ============================================================
-# SESSION 1 LAB: This file is intentionally sparse.
-# Your task is to expand these rules to encode the full
-# architecture of this project. Use @codebase to explore
-# the patterns already in use, then write rules that enforce them.
-# ============================================================
+---
+description: >-
+  TaskFlow API project overview and architecture. Documents the Node.js + TypeScript
+  (strict) + Express + PostgreSQL stack, Jest/Supertest test tooling, and folder
+  layout — routes for HTTP only, services for business logic, middleware for
+  cross-cutting concerns, db for the pool, types for shared interfaces, and
+  tests/unit vs tests/integration separation.
+alwaysApply: true
+---
+# TaskFlow API — Project Rules
 
-## Project Overview
-This is a Node.js + TypeScript REST API for task management.
-Stack: Express, PostgreSQL (via node-postgres), Jest, TypeScript strict mode.
+## Stack
+Node.js + TypeScript (strict mode). Express. PostgreSQL via node-postgres.
+Jest + Supertest for tests. All code in src/.
 
-## What to add in Session 1 Lab:
-# - Naming conventions (routes, services, DTOs)
-# - Error handling standards (always use AppError, always pass to next())
-# - Response format (always use ApiResponse<T> wrapper)
-# - Validation rules (all POST/PATCH routes must apply validate middleware)
-# - Test conventions (describe/it structure, supertest for integration tests)
-# - Banned patterns (no raw try/catch without next(err), no console.log in production)
+## Folder structure
+src/routes/      — Express routers only. No business logic.
+src/services/    — All business logic. No direct req/res access.
+src/middleware/  — Express middleware (validate, errorHandler).
+src/db/          — PostgreSQL pool only.
+src/types/       — Shared interfaces and DTOs. No classes.
+tests/unit/      — Unit tests for services.
+tests/integration/ — Supertest integration tests for routes.

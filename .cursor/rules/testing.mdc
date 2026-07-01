@@ -1,0 +1,29 @@
+---
+description: >-
+  Testing conventions for TaskFlow using Jest and Supertest. Defines describe/it
+  naming, integration test setup with the Express app and taskflow_test database,
+  required coverage per route (happy path, 400, 404, 500) and per service (mocked DB
+  pool), and assertions on res.status, res.body.success, and res.body.data shape.
+globs: tests/**/*
+alwaysApply: true
+---
+# Testing Conventions
+
+## Structure
+describe('<METHOD> <route>', () => {
+  it('should <expected behavior>', async () => { ... })
+})
+
+## Integration tests
+Use supertest with the Express app from src/app.ts.
+Each test file imports { app } from '../../src/app'.
+Use beforeAll/afterAll for DB setup and teardown.
+Never use real production DB — use the taskflow_test database.
+
+## What to test
+Every route: happy path, 400 bad input, 404 not found, 500 error.
+Every service: unit test with mocked DB pool.
+
+## Assertions
+Use expect(res.status).toBe(xxx) before asserting body.
+Always assert res.body.success and res.body.data shape.

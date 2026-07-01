@@ -1,0 +1,22 @@
+---
+description: >-
+  Pull request review policy for BugBot findings. PRs with CRITICAL-severity BugBot
+  findings cannot be merged until a human comment directly addresses each finding.
+  Defines the four-step review process and merge criteria (no critical findings, or
+  human response that resolves them).
+alwaysApply: true
+---
+## Review Policy
+"PRs com findings de severidade CRITICAL do BugBot
+nao podem ser mergeados sem ao menos um comentario
+humano respondendo diretamente ao finding."
+
+## Review Process
+1. Review the PR
+2. Check for findings of severity CRITICAL from BugBot
+3. If there are any, comment on the PR with a human response addressing the finding
+4. Merge the PR if there are no critical findings or if the human response addresses the finding
+
+## Review Criteria
+1. The PR must be free of critical findings from BugBot
+2. The PR must have a human response addressing any critical findings
